@@ -56,14 +56,17 @@ namespace TechJobsConsole
 
                     // What is their search term?
                     Console.WriteLine("\nSearch term: ");
-                    string searchTerm = Console.ReadLine();
+                    string searchTerm = Console.ReadLine().ToLower();
+                    // added toLower to make case insensitive
 
                     List<Dictionary<string, string>> searchResults;
 
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        //Console.WriteLine("Search all fields not yet implemented.");
+                        searchResults = JobData.FindByValue(searchTerm);
+                        PrintJobs(searchResults);
                     }
                     else
                     {
@@ -118,7 +121,28 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("PrintJobs is not implemented yet");
+            //first what if result is no jobs//
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("There are no results for your search. Please try again.");
+            }
+            // then if there's any result at all, loop through each job/dictionary and print out
+            // the key value pair for each
+            // add 5 happy little asterisks before and after, and blank line after closing asterisks
+            // moved blank line to opening asterisks to provide space between search term and results
+
+            else
+            {
+                foreach (Dictionary<string, string> jobFound in someJobs)
+
+                {
+                    Console.WriteLine("\n*****");
+                    foreach (KeyValuePair<string, string> keyAndValue in jobFound)
+                    {
+                        Console.WriteLine("{0}: {1}", keyAndValue.Key, keyAndValue.Value);                    }
+                        Console.WriteLine("*****");
+                }
+            }
         }
     }
 }
