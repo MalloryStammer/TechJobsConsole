@@ -134,8 +134,7 @@ namespace TechJobsConsole
             else
             {
                 foreach (Dictionary<string, string> jobFound in someJobs)
-
-                {
+                { 
                     Console.WriteLine("\n*****");
                     foreach (KeyValuePair<string, string> keyAndValue in jobFound)
                     {
